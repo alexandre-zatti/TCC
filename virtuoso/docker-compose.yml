@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  virtuoso:
+    image: zatti/virtuoso
+    ports:
+      - "1111:1111" # Expose Virtuoso's HTTP port
+      - "8890:8890" # Expose Virtuoso's SPARQL endpoint port
+    environment:
+      - DBA_PASSWORD=123 # Set a password for the DBA user
+    volumes:
+      - ./virtuoso.ini:/virtuoso.ini # Mount the virtuoso.ini file
+      - ./data:/data # Mount a data directory for persistence
