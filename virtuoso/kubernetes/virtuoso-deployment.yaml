@@ -39,7 +39,7 @@ spec:
                   key: dba-password
           volumeMounts:
             - name: virtuoso-data
-            - mountPath: /database
+              mountPath: /database
       volumes:
       - name: virtuoso-data
         persistentVolumeClaim:
