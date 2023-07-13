@@ -6,7 +6,7 @@ metadata:
     name: virtuoso-service
     app: virtuoso-gke-deployment
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     name: virtuoso-pod
     app: virtuoso-gke-deployment
