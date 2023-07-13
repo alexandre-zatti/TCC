@@ -24,6 +24,13 @@ spec:
           ports:
             - containerPort: 1111
             - containerPort: 8890
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "1Gi"
+            limits:
+              cpu: "500m"
+              memory: "1Gi"
           env:
             - name: DBA_PASSWORD
               valueFrom:
@@ -32,6 +39,7 @@ spec:
                   key: dba-password
           volumeMounts:
             - name: virtuoso-data
+            - mountPath: /database
       volumes:
       - name: virtuoso-data
         persistentVolumeClaim:
