@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: virtuoso-deploy
+  labels:
+    name: virtuoso-deploy
+    app: virtuoso-gke-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: virtuoso-pod
+      app: virtuoso-gke-deployment
+  template:
+    metadata:
+      name: virtuoso-pod
+      labels:
+        name: virtuoso-pod
+        app: virtuoso-gke-deployment
+    spec:
+      containers:
+        - name: virtuoso
+          image: openlink/virtuoso-opensource-7
+          ports:
+            - containerPort: 1111
+            - containerPort: 8890
+          env:
+            - name: DBA_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: virtuoso-secret
+                  key: dba-password
+          volumeMounts:
+            - name: virtuoso-data
+      volumes:
+      - name: virtuoso-data
+        persistentVolumeClaim:
+          claimName: virtuoso-data-store

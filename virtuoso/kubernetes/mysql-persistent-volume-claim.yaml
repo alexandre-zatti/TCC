@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: virtuoso-data-store
+  labels:
+    name: virtuoso-data-store
+    app: virtuoso-gke-deployment
+spec:
+  resources:
+    requests:
+      storage: 1Gi
+    limits:
+      storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: standard-rwo
